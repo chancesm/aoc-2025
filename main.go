@@ -6,6 +6,8 @@ import (
 	"log"
 
 	_ "github.com/chancesm/aoc-2025/days/day01"
+	_ "github.com/chancesm/aoc-2025/days/day02"
+
 	"github.com/chancesm/aoc-2025/internal/framework"
 )
 

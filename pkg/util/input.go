@@ -13,3 +13,6 @@ func NonEmptyLines(s string) []string {
 	}
 	return out
 }
+func CommaSeparated(s string) []string {
+	return strings.Split(s, ",")
+}
