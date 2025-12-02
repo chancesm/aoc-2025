@@ -22,9 +22,18 @@ func TestAdjust(t *testing.T) {
 	got := adjust(-1)
 	want := int64(99)
 	if got != want {
-		t.Fatalf("applyMod(0,-1) = %d, want %d", got, want)
+		t.Fatalf("adjust(-1) = %d, want %d", got, want)
 	}
 
+}
+
+func TestApplyMod(t *testing.T) {
+	got1 := applyMod(1, -120)
+	want1 := int64(81)
+	if got1 != want1 {
+		t.Fatalf("applyMod(1,-120) = %d, want %d", got1, want1)
+	}
+	
 }
 
 func TestPart1_Sample(t *testing.T) {

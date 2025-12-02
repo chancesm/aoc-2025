@@ -36,20 +36,36 @@ func (Day01) Part1(inputStr string) string {
 	return strconv.Itoa(count0)
 }
 
+// I gave up and went with the "brute force" method
 func (Day01) Part2(inputStr string) string {
 	lines := util.NonEmptyLines(inputStr)
-	dial := int64(50)
+	dial := 50
 	count0 := 0
 	for _, line := range lines {
-		start := dial
-		mod := parseLine(line)
-		dial2, crossed0 := applyMod2(dial, mod)
-		dial = dial2
-		if dial == 0 || (crossed0 > 0 && start != 0) {
-			count0 += 1
+		mod := int(parseLine(line))
+		if mod > 0 {
+			for i := 0; i < mod; i++ {
+				dial = dial + 1
+				if dial == 100 {
+					dial = 0
+					count0 += 1
+				}
+			}
 		}
-		fmt.Printf("%s: %d, %d\n", line, dial, count0)
+		if mod < 0 {
+			for i := 0; i > mod; i-- {
+				dial = dial - 1
+				if dial == 0 {
+					count0 += 1
+				}
+				if dial == -1 {
+					dial = 99
+				}
+			}
+
+		}
 	}
+
 	return strconv.Itoa(count0)
 }
 
@@ -63,32 +79,12 @@ func adjust(val int64) int64 {
 	return val
 }
 
-func adjust2(val int64) (int64, int) {
-	callCount := 0
-	if val > 99 {
-		out, cc := adjust2(val - 100)
-		return out, cc + callCount
-	}
-	if val < 0 {
-		out, cc := adjust2(val + 100)
-		return out, cc + callCount
-	}
-	return val, callCount
-}
-
 func applyMod(dial, mod int64) int64 {
-	temp := dial + mod
 
-	return adjust(temp)
-}
-func applyMod2(dial, mod int64) (int64, int) {
 	temp := dial + mod
-	adjusted, callCount := adjust2(temp)
-	if adjusted == 0 || (temp != adjusted){
-		callCount += 1
-	}
-	return adjusted, callCount
+	adjusted := adjust(temp)
 
+	return adjusted
 }
 
 func parseLine(str string) int64 {
