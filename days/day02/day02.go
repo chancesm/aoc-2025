@@ -48,8 +48,38 @@ func (Day02) Part1(inputStr string) string {
 }
 
 func (Day02) Part2(inputStr string) string {
-	lines := util.NonEmptyLines(inputStr)
-	return strconv.Itoa(len(lines))
+	invalidIDs := make([]int, 0)
+	ranges := util.CommaSeparated(inputStr)
+	for _, rng := range ranges {
+		start, end := splitRange(rng)
+		for i := start; i <= end; i++ {
+			str_val := strconv.Itoa(i)
+			str_len := len(str_val)
+			if str_len < 2 {
+				continue
+			}
+			// find valid part sizes
+			valid_part_sizes := []int{1}
+			maxPotentialPart := str_len / 2
+			for partSize := 2; partSize <= maxPotentialPart; partSize++ {
+				if str_len%partSize == 0 {
+					valid_part_sizes = append(valid_part_sizes, partSize)
+				}
+			}
+			for _, size := range valid_part_sizes {
+				if str_val == strings.Repeat(str_val[:size], (str_len/size)) {
+					invalidIDs = append(invalidIDs, i)
+					break
+				}
+			}
+
+		}
+	}
+	count := 0
+	for _, v := range invalidIDs {
+		count += v
+	}
+	return strconv.Itoa(count)
 }
 
 func splitRange(s string) (int, int) {

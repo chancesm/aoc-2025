@@ -19,8 +19,17 @@ func TestPart1_Sample(t *testing.T) {
 
 func TestPart2_Sample(t *testing.T) {
 	got := (Day02{}).Part2(strings.TrimSpace(sample))
-	const want = "unimplemented"
+	const want = "4174379265"
 	if got != want {
 		t.Fatalf("Part2(sample) = %s, want %s", got, want)
+	}
+}
+
+func TestPart2_Full(t *testing.T) {
+	day2 := Day02{}
+	got := day2.Part2(day2.Input())
+	want := "65794984339"
+	if got != want {
+		t.Fatalf("Part2(full) = %s, want %s", got, want)
 	}
 }
