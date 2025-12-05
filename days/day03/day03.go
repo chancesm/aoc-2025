@@ -51,29 +51,11 @@ func (Day03) Part2(inputStr string) string {
 	lines := util.NonEmptyLines(inputStr)
 	final := 0
 	for _, line := range lines {
-		iters := make([]rune, 12, 12)
+		iters := make([]rune, 12)
 		runes := []rune(line)
-	charLoop:
-		for i := 0; i < len(runes); i++ {
-			current := runes[i]
-			for j := 0; j < 12; j++ {
-				iter_cmp := iters[j]
-				// if unable to shift, continue
-				if (len(runes) - i) < (12-j) {
-					continue
-				}
 
-				if current > iter_cmp {
-					// set iters[j] to current
-					iters[j] = current
-					// set all values after j
-					for k := 1; k < 12-j; k++ {
-						iters[j + k] = runes[i + k]
-					}
-				}
-				continue charLoop
-			}
-		}
+		for i := 0; i < len(runes); i++ {
+			
 		voltage, _ := strconv.Atoi(string(iters))
 		final += voltage
 	}
