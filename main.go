@@ -8,6 +8,9 @@ import (
 	_ "github.com/chancesm/aoc-2025/days/day01"
 	_ "github.com/chancesm/aoc-2025/days/day02"
 	_ "github.com/chancesm/aoc-2025/days/day03"
+	_ "github.com/chancesm/aoc-2025/days/day04"
+	_ "github.com/chancesm/aoc-2025/days/day05"
+	_ "github.com/chancesm/aoc-2025/days/day06"
 
 	"github.com/chancesm/aoc-2025/internal/framework"
 )

@@ -36,8 +36,8 @@ func TestPart2_Small1(t *testing.T) {
 	}
 }
 func TestPart2_Small2(t *testing.T) {
-	got := (Day03{}).Part2("811111111119")
-	const want = "888911112111"
+	got := (Day03{}).Part2("811111111111119")
+	const want = "811111111119"
 	if got != want {
 		t.Fatalf("Part2(small2) = %s, want %s", got, want)
 	}

@@ -53,12 +53,24 @@ func (Day03) Part2(inputStr string) string {
 	for _, line := range lines {
 		iters := make([]rune, 12)
 		runes := []rune(line)
-
-		for i := 0; i < len(runes); i++ {
-			
+		idx := 0
+		for i := 0; i < 12; i++ {
+			idx, iters[i] = getLargest(idx, 12-(i+1), runes)		}
 		voltage, _ := strconv.Atoi(string(iters))
 		final += voltage
 	}
 
 	return strconv.Itoa(final)
+}
+
+func getLargest(start, toIgnore int, values []rune) (idx int, ch rune) {
+	l_idx := -1
+	var l_ch rune
+	for i := start; i < len(values)-toIgnore; i++ {
+		if values[i] > l_ch {
+			l_ch = values[i]
+			l_idx = i
+		}
+	}
+	return l_idx + 1, l_ch
 }
