@@ -13,6 +13,16 @@ func NonEmptyLines(s string) []string {
 	}
 	return out
 }
+func NonEmptyLinesNoTrim(s string) []string {
+	raw := strings.Split(s, "\n")
+	out := make([]string, 0, len(raw))
+	for _, line := range raw {
+		if line != "" {
+			out = append(out, line)
+		}
+	}
+	return out
+}
 func CommaSeparated(s string) []string {
 	return strings.Split(s, ",")
 }

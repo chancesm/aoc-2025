@@ -21,10 +21,19 @@ func TestPart1_Sample(t *testing.T) {
 }
 
 func TestPart2_Sample(t *testing.T) {
-	got := (Day06{}).Part2(strings.TrimSpace(sample))
+	got := (Day06{}).Part2(sample)
 	const want = "3263827"
 	if got != want {
 		t.Fatalf("Part2(sample) = %s, want %s", got, want)
 	}
 }
 
+func TestPart2_Input(t *testing.T) {
+	got := (Day06{}.Part2(input))
+	const want = "????"
+		if got != want {
+		t.Fatalf("Part2(input) = %s, want %s", got, want)
+	}
+}
+
+// 9170285058027 is too low

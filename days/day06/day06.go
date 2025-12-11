@@ -13,7 +13,7 @@ import (
 //go:embed input.txt
 var input string
 
-const RegExpPattern string = `[\*\+][ ]*`
+const RegExpPattern string = `[\*\+][ ]+`
 
 type Day06 struct{}
 
@@ -82,22 +82,26 @@ func (Day06) Part1(inputStr string) string {
 
 func (Day06) Part2(inputStr string) string {
 	re := regexp.MustCompile(RegExpPattern)
-	lines := util.NonEmptyLines(inputStr)
+	lines := util.NonEmptyLinesNoTrim(inputStr)
 	probValLen := len(lines) - 1
 	_ = probValLen
 	lastLine := lines[len(lines)-1]
 	patterns := re.FindAll([]byte(lastLine), -1)
 	problems := make([]Problem, 0)
 
-	for _, p := range patterns {
+	for i_p, p := range patterns {
+		value_len := len(p) - 1
+		if i_p == len(patterns)-1 {
+			value_len = len(p)
+		}
 		problems = append(problems, Problem{
-			values:  make([]int, len(p)-1),
+			values:  make([]int, value_len),
 			mod:     string(p[0]),
 			maxChar: len(p) - 1,
 		})
 	}
-	currentProb := problems[0]
-	currentProbIdx := 0
+	var currentProb Problem
+	currentProbIdx := -1
 	valueIdx := 0
 	for c := 0; c < len(lines[0]); c++ {
 		pow := 1
@@ -113,9 +117,9 @@ func (Day06) Part2(inputStr string) string {
 			if val != " " {
 				// parse, mult by pow, and add to problem's values at value index
 				v, _ := strconv.Atoi(val)
-				currentProb.values[valueIdx] += v*pow
+				currentProb.values[valueIdx] += v * pow
 				// mult pow by 10
-				pow *=10
+				pow *= 10
 			}
 		}
 		valueIdx++
